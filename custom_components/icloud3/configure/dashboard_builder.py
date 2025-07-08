@@ -579,7 +579,7 @@ async def _load_templates(self):
 
     for template_filename in template_filenames:
         filename      = f"{directory}/{template_filename}"
-        template_json = await file_io.read_json_file(filename)
+        template_json = await file_io.async_read_json_file(filename)
         template_name = template_filename.split('.')[0]
 
         if template_name == 'master-dashboard':
@@ -809,7 +809,7 @@ async def _read_dashboard_layout_file(dbname):
     '''
     try:
         dashboard_file = f"{Gb.ha_storage_directory}/lovelace.{dbname.replace('-', '_')}"
-        dashboard_layout_dict = await file_io.read_json_file(dashboard_file)
+        dashboard_layout_dict = await file_io.async_read_json_file(dashboard_file)
 
         return dashboard_layout_dict
 
@@ -964,7 +964,7 @@ async def _read_lovelace_dashboards_file():
     '''
     try:
         dashboards_file = f"{Gb.ha_storage_directory}/lovelace_dashboards"
-        dashboards_config = await file_io.read_json_file(dashboards_file)
+        dashboards_config = await file_io.async_read_json_file(dashboards_file)
         if is_empty(dashboards_config):
             return []
 
